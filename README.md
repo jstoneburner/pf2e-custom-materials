@@ -25,10 +25,18 @@ of the system that *are* open for extension: item traits, item flags, and rule e
 
 ## Installation
 
-1. Copy this folder into your Foundry VTT `Data/modules/` directory, or package it and install it
-   via the module manifest.
-2. Enable **Custom Precious Materials for PF2e** in your world's Manage Modules screen.
-3. As a GM, open **Settings > Custom Precious Materials** to create your first material.
+In Foundry's **Add-on Modules** tab, click **Install Module** and paste this manifest URL:
+
+```
+https://github.com/jstoneburner/pf2e-custom-materials/releases/latest/download/module.json
+```
+
+This requires at least one release to have been published (see [Releasing a new
+version](#releasing-a-new-version) below). Alternatively, copy this folder directly into your
+Foundry VTT `Data/modules/` directory.
+
+Once installed, enable **PF2e Custom Precious Materials** in your world's Manage Modules screen,
+then, as a GM, open **Settings > Custom Precious Materials** to create your first material.
 
 ## Usage
 
@@ -69,6 +77,21 @@ field or feed into the compendium browser's material filter, since those are dri
 closed internal data. For most homebrew purposes — a reskin of a magic material with its own price,
 resistance-bypass behavior, and flavor — this is enough; it just isn't a byte-for-byte reproduction
 of how the printed materials work under the hood.
+
+## Releasing a new version
+
+Releases are built by a GitHub Actions workflow (`.github/workflows/release.yml`) that packages the
+module into a zip and attaches it, along with `module.json`, to a GitHub release.
+
+1. Bump `"version"` in `module.json` and commit it.
+2. Tag the commit with exactly that version number, with no `v` prefix (for example `0.2.0`), and
+   push the tag: `git tag 0.2.0 && git push origin 0.2.0`.
+3. The workflow verifies the tag matches `module.json`'s version, builds
+   `pf2e-custom-materials.zip`, and publishes a GitHub release with that zip and `module.json`
+   attached.
+
+Because `manifest` points at `releases/latest/download/module.json`, Foundry's install/update flow
+always resolves to whatever release GitHub currently considers "latest."
 
 ## License
 
