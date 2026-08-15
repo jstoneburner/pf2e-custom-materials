@@ -1,6 +1,10 @@
 import { FLAG_APPLIED, MODULE_ID, RARITY_ORDER } from "./constants.js";
 import { getMaterial } from "./materials-data.js";
 
+/** Marker key stamped onto rule elements this module adds, so they can be found and removed later
+ *  even if the system or its sheet normalizes/adds default fields to the rule after it's applied. */
+const RULE_MARKER = "pf2ecmMaterialSlug";
+
 /**
  * Combine an item's current base price with a material grade's price.
  * This mirrors the system's own "base price plus material value" approach but omits its bulk-scaling
@@ -9,17 +13,6 @@ import { getMaterial } from "./materials-data.js";
 function computePrice(basePriceGp, grade) {
     const total = (basePriceGp || 0) + (grade?.price || 0);
     return Math.round(total * 100) / 100;
-}
-
-/** Remove one instance of each rule in `rulesToRemove` from `rules`, matched by content rather than position. */
-function subtractRules(rules, rulesToRemove) {
-    const remaining = [...rules];
-    for (const target of rulesToRemove) {
-        const targetJson = JSON.stringify(target);
-        const index = remaining.findIndex((rule) => JSON.stringify(rule) === targetJson);
-        if (index !== -1) remaining.splice(index, 1);
-    }
-    return remaining;
 }
 
 async function applyMaterial(item, slug, gradeKey) {
@@ -48,7 +41,9 @@ async function applyMaterial(item, slug, gradeKey) {
     const traits = new Set(priorState.traits);
     traits.add(material.slug);
 
-    const rulesToAdd = foundry.utils.deepClone(material.rules ?? []);
+    const rulesToAdd = foundry.utils
+        .deepClone(material.rules ?? [])
+        .map((rule) => ({ ...rule, [RULE_MARKER]: material.slug }));
     const newRules = [...priorState.rules, ...rulesToAdd];
 
     const update = {
@@ -58,7 +53,6 @@ async function applyMaterial(item, slug, gradeKey) {
         [`flags.${MODULE_ID}.${FLAG_APPLIED}`]: {
             slug: material.slug,
             grade: gradeKey,
-            addedRules: rulesToAdd,
             priorState,
         },
     };
@@ -91,9 +85,9 @@ async function removeMaterial(item, { render = true } = {}) {
     const applied = item.flags?.[MODULE_ID]?.[FLAG_APPLIED];
     if (!applied) return;
 
-    const { priorState, addedRules } = applied;
+    const { priorState } = applied;
     const currentRules = foundry.utils.deepClone(item.system.rules ?? []);
-    const restoredRules = addedRules?.length ? subtractRules(currentRules, addedRules) : currentRules;
+    const restoredRules = currentRules.filter((rule) => rule[RULE_MARKER] !== applied.slug);
 
     const update = {
         name: priorState.name,
