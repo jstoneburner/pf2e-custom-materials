@@ -1,0 +1,131 @@
+.pf2ecm-panel {
+    margin-bottom: 0.5em;
+    padding: 0.4em 0.6em;
+    border: 1px solid var(--color-border-light-tertiary, #b5b3a4);
+    border-radius: 4px;
+}
+
+.pf2ecm-panel legend {
+    font-weight: bold;
+    padding: 0 0.3em;
+}
+
+.pf2ecm-picker,
+.pf2ecm-applied {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.pf2ecm-picker select {
+    flex: 1;
+}
+
+.pf2ecm-empty {
+    font-style: italic;
+    opacity: 0.75;
+    margin: 0;
+}
+
+.pf2ecm-manager-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+    padding: 0.5em;
+    overflow-y: auto;
+}
+
+.pf2ecm-toolbar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pf2ecm-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pf2ecm-list th,
+.pf2ecm-list td {
+    text-align: left;
+    padding: 0.3em 0.5em;
+    border-bottom: 1px solid var(--color-border-light-tertiary, #b5b3a4);
+}
+
+.pf2ecm-slug {
+    opacity: 0.65;
+    font-size: 0.9em;
+}
+
+.pf2ecm-row-actions {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.pf2ecm-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+}
+
+.pf2ecm-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75em;
+}
+
+.pf2ecm-grades {
+    border: 1px solid var(--color-border-light-tertiary, #b5b3a4);
+    border-radius: 4px;
+    padding: 0.5em;
+}
+
+.pf2ecm-grade-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    padding: 0.3em 0;
+    border-bottom: 1px dashed var(--color-border-light-tertiary, #b5b3a4);
+}
+
+.pf2ecm-grade-row:last-child {
+    border-bottom: none;
+}
+
+.pf2ecm-grade-toggle {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.pf2ecm-grade-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75em;
+}
+
+.pf2ecm-grade-fields label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85em;
+}
+
+.pf2ecm-grade-fields input {
+    width: 6em;
+}
+
+.pf2ecm-rules {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85em;
+}
+
+.pf2ecm-editor-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5em;
+}
+
+.pf2ecm-manager .hint {
+    opacity: 0.75;
+    font-size: 0.85em;
+    margin: 0.2em 0 0;
+}

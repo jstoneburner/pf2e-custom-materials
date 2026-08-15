@@ -1,0 +1,111 @@
+<div class="pf2ecm-manager-body">
+    {{#unless editing}}
+        <header class="pf2ecm-toolbar">
+            <button type="button" data-action="new-material">
+                <i class="fa-solid fa-plus"></i> {{localize "PF2ECM.Manager.New"}}
+            </button>
+        </header>
+        {{#if hasMaterials}}
+            <table class="pf2ecm-list">
+                <thead>
+                    <tr>
+                        <th>{{localize "PF2ECM.Manager.Label"}}</th>
+                        <th>{{localize "PF2ECM.Manager.ItemTypes"}}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each materials}}
+                        <tr data-slug="{{this.slug}}">
+                            <td>{{this.label}} <span class="pf2ecm-slug">({{this.slug}})</span></td>
+                            <td>{{this.itemTypesLabel}}</td>
+                            <td class="pf2ecm-row-actions">
+                                <button type="button" data-action="edit-material" title="{{localize 'PF2ECM.Manager.Edit'}}">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button type="button" data-action="delete-material" title="{{localize 'PF2ECM.Manager.Delete'}}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{else}}
+            <p class="pf2ecm-empty">{{localize "PF2ECM.Manager.Empty"}}</p>
+        {{/if}}
+    {{else}}
+        <section class="pf2ecm-editor">
+            <div class="form-group">
+                <label>{{localize "PF2ECM.Manager.Label"}}</label>
+                <input type="text" name="label" value="{{editing.label}}" />
+            </div>
+            <div class="form-group">
+                <label>{{localize "PF2ECM.Manager.Slug"}}</label>
+                <input type="text" name="slug" value="{{editing.slug}}" {{#unless isNew}}readonly{{/unless}}
+                    placeholder="{{localize 'PF2ECM.Manager.SlugHint'}}" />
+            </div>
+            <div class="form-group">
+                <label>{{localize "PF2ECM.Manager.ItemTypes"}}</label>
+                <div class="pf2ecm-checkboxes">
+                    {{#each itemTypeChoices}}
+                        <label>
+                            <input type="checkbox" name="itemType-{{this.type}}" {{#if this.checked}}checked{{/if}} />
+                            {{this.type}}
+                        </label>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="prefixName" {{#if editing.prefixName}}checked{{/if}} />
+                    {{localize "PF2ECM.Manager.PrefixName"}}
+                </label>
+            </div>
+            <div class="form-group">
+                <label>{{localize "PF2ECM.Manager.Description"}}</label>
+                <textarea name="description" rows="3">{{editing.description}}</textarea>
+            </div>
+
+            <fieldset class="pf2ecm-grades">
+                <legend>{{localize "PF2ECM.Manager.Grades"}}</legend>
+                {{#each gradeRows}}
+                    <div class="pf2ecm-grade-row">
+                        <label class="pf2ecm-grade-toggle">
+                            <input type="checkbox" data-grade-toggle="{{this.key}}" {{#if this.checked}}checked{{/if}} />
+                            {{this.key}}
+                        </label>
+                        <div class="pf2ecm-grade-fields" data-grade-fields="{{this.key}}" {{#unless this.checked}}hidden{{/unless}}>
+                            <label>{{localize "PF2ECM.Manager.Level"}}
+                                <input type="number" name="grade-{{this.key}}-level" value="{{this.data.level}}" />
+                            </label>
+                            <label>{{localize "PF2ECM.Manager.Price"}}
+                                <input type="number" step="0.01" name="grade-{{this.key}}-price" value="{{this.data.price}}" />
+                            </label>
+                            <label>{{localize "PF2ECM.Manager.Hardness"}}
+                                <input type="number" name="grade-{{this.key}}-hardness" value="{{this.data.hardness}}" />
+                            </label>
+                            <label>{{localize "PF2ECM.Manager.MaxHP"}}
+                                <input type="number" name="grade-{{this.key}}-maxHP" value="{{this.data.maxHP}}" />
+                            </label>
+                        </div>
+                    </div>
+                {{/each}}
+                <p class="hint">{{localize "PF2ECM.Manager.GradesHint"}}</p>
+            </fieldset>
+
+            <div class="form-group">
+                <label>{{localize "PF2ECM.Manager.Rules"}}</label>
+                <textarea name="rules" rows="6" class="pf2ecm-rules">{{rulesJson}}</textarea>
+                <p class="hint">{{localize "PF2ECM.Manager.RulesHint"}}</p>
+            </div>
+
+            <footer class="pf2ecm-editor-footer">
+                <button type="button" data-action="save-material">
+                    <i class="fa-solid fa-floppy-disk"></i> {{localize "PF2ECM.Manager.Save"}}
+                </button>
+                <button type="button" data-action="cancel-edit">{{localize "PF2ECM.Manager.Cancel"}}</button>
+            </footer>
+        </section>
+    {{/unless}}
+</div>

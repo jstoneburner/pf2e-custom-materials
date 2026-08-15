@@ -1,0 +1,53 @@
+{
+    "PF2ECM": {
+        "Grade": {
+            "Low": "Low-Grade",
+            "Standard": "Standard-Grade",
+            "High": "High-Grade"
+        },
+        "Settings": {
+            "ManagerName": "Custom Precious Materials",
+            "ManagerLabel": "Manage Materials",
+            "ManagerHint": "Create, edit, and remove homebrew precious materials that can be applied to weapons, armor, shields, and equipment."
+        },
+        "Manager": {
+            "Title": "Custom Precious Materials",
+            "New": "New Material",
+            "Empty": "No custom materials yet. Click \"New Material\" to create one.",
+            "Label": "Label",
+            "Slug": "Slug",
+            "SlugHint": "Auto-generated from the label if left blank",
+            "ItemTypes": "Applies To",
+            "PrefixName": "Prefix item names with this material's label when applied",
+            "Description": "Description",
+            "Grades": "Grades",
+            "GradesHint": "Enable at least one grade. Hardness and Max HP are only used for shields.",
+            "Level": "Level",
+            "Price": "Price (gp)",
+            "Hardness": "Hardness",
+            "MaxHP": "Max HP",
+            "Rules": "Rule Elements (JSON, optional)",
+            "RulesHint": "Advanced: a JSON array of PF2e rule element objects to add to an item while this material is applied, for example a flat attack or damage bonus.",
+            "Edit": "Edit",
+            "Delete": "Delete",
+            "Save": "Save",
+            "Cancel": "Cancel",
+            "DeleteTitle": "Delete Material",
+            "DeleteConfirm": "Delete the custom material \"{slug}\"? Items it is currently applied to will keep their adjusted name, price, and traits until the material is cleared from them individually.",
+            "ErrorNoLabel": "Enter a label for the material.",
+            "ErrorNoSlug": "Could not generate a valid slug from that label.",
+            "ErrorDuplicateSlug": "A material with the slug \"{slug}\" already exists.",
+            "ErrorNoItemTypes": "Select at least one item type this material applies to.",
+            "ErrorNoGrades": "Enable at least one grade.",
+            "ErrorBadRules": "Rule Elements must be valid JSON describing an array of objects."
+        },
+        "Sheet": {
+            "Legend": "Custom Precious Material",
+            "Apply": "Apply",
+            "Clear": "Clear",
+            "CurrentlyApplied": "Currently applied:",
+            "NoMaterials": "No custom materials are configured for this item type.",
+            "OptionLabel": "{material} ({grade})"
+        }
+    }
+}

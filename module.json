@@ -1,0 +1,43 @@
+{
+    "id": "pf2e-custom-materials",
+    "title": "Custom Precious Materials for PF2e",
+    "description": "Lets Game Masters define homebrew precious materials and apply them to weapons, armor, shields, and equipment in the Pathfinder Second Edition system.",
+    "version": "0.1.0",
+    "authors": [
+        {
+            "name": "James Stoneburner"
+        }
+    ],
+    "compatibility": {
+        "minimum": "13",
+        "verified": "14"
+    },
+    "relationships": {
+        "systems": [
+            {
+                "id": "pf2e",
+                "type": "system",
+                "compatibility": {
+                    "minimum": "6"
+                }
+            }
+        ]
+    },
+    "esmodules": [
+        "scripts/main.js"
+    ],
+    "styles": [
+        "styles/module.css"
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "url": "",
+    "manifest": "",
+    "download": "",
+    "license": "LICENSE"
+}

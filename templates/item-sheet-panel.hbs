@@ -1,0 +1,20 @@
+<fieldset class="pf2ecm-panel">
+    <legend>{{localize "PF2ECM.Sheet.Legend"}}</legend>
+    {{#if hasApplied}}
+        <p class="pf2ecm-applied">
+            <span>{{localize "PF2ECM.Sheet.CurrentlyApplied"}} <strong>{{applied.label}}</strong> ({{applied.grade}})</span>
+            <button type="button" data-action="clear-custom-material">{{localize "PF2ECM.Sheet.Clear"}}</button>
+        </p>
+    {{else if hasOptions}}
+        <div class="pf2ecm-picker">
+            <select name="pf2ecm-material">
+                {{#each options}}
+                    <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+                {{/each}}
+            </select>
+            <button type="button" data-action="apply-custom-material">{{localize "PF2ECM.Sheet.Apply"}}</button>
+        </div>
+    {{else}}
+        <p class="pf2ecm-empty">{{localize "PF2ECM.Sheet.NoMaterials"}}</p>
+    {{/if}}
+</fieldset>
