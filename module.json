@@ -36,8 +36,8 @@
             "path": "lang/en.json"
         }
     ],
-    "url": "",
-    "manifest": "",
-    "download": "",
+    "url": "https://github.com/jstoneburner/pf2e-custom-materials",
+    "manifest": "https://raw.githubusercontent.com/jstoneburner/pf2e-custom-materials/main/module.json",
+    "download": "https://github.com/jstoneburner/pf2e-custom-materials/archive/refs/heads/main.zip",
     "license": "LICENSE"
 }
