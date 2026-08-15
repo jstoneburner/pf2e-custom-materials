@@ -29,7 +29,7 @@
             "NamePrefixHint": "Defaults to the label above if left blank",
             "Description": "Description",
             "Grades": "Grades",
-            "GradesHint": "Enable at least one grade. Hardness and Max HP are only used for shields. Level and Rarity are written directly to the item; if it also carries magic runes with a higher level, the system will still show that higher level.",
+            "GradesHint": "Enable at least one grade. Hardness and Max HP are only used for shields. Level and Rarity act as a floor: applying this material never lowers an item's level or rarity, only raises it to at least the grade's value.",
             "Level": "Level",
             "Price": "Price (gp)",
             "Rarity": "Rarity",

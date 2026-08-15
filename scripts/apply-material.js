@@ -1,4 +1,4 @@
-import { FLAG_APPLIED, MODULE_ID } from "./constants.js";
+import { FLAG_APPLIED, MODULE_ID, RARITY_ORDER } from "./constants.js";
 import { getMaterial } from "./materials-data.js";
 
 /**
@@ -63,11 +63,15 @@ async function applyMaterial(item, slug, gradeKey) {
         },
     };
 
+    // A material sets a floor, the same way the system's own materials work: it never lowers an
+    // item's level or rarity below what it already had, only raises it to at least the grade's value.
     if (grade.level !== null && grade.level !== undefined && priorState.level !== null) {
-        update["system.level.value"] = grade.level;
+        update["system.level.value"] = Math.max(grade.level, priorState.level);
     }
     if (grade.rarity) {
-        update["system.traits.rarity"] = grade.rarity;
+        const currentRarity = priorState.rarity ?? "common";
+        update["system.traits.rarity"] =
+            (RARITY_ORDER[grade.rarity] ?? 0) > (RARITY_ORDER[currentRarity] ?? 0) ? grade.rarity : currentRarity;
     }
 
     if (item.type === "shield") {

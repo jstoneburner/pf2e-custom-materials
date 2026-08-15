@@ -31,3 +31,6 @@ export const RARITY_LABELS = {
     rare: "PF2ECM.Rarity.Rare",
     unique: "PF2ECM.Rarity.Unique",
 };
+
+/** Ordering used to treat a material grade's level/rarity as a floor rather than an override. */
+export const RARITY_ORDER = { common: 0, uncommon: 1, rare: 2, unique: 3 };
