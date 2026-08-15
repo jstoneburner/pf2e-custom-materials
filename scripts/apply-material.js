@@ -35,6 +35,8 @@ async function applyMaterial(item, slug, gradeKey) {
         name: item.name,
         price: foundry.utils.deepClone(item.system.price?.value ?? {}),
         traits: [...(item.system.traits?.value ?? [])],
+        rarity: item.system.traits?.rarity ?? null,
+        level: item.system.level?.value ?? null,
         hardness: item.system.hardness ?? null,
         hpMax: item.system.hp?.max ?? null,
         rules: foundry.utils.deepClone(item.system.rules ?? []),
@@ -61,13 +63,21 @@ async function applyMaterial(item, slug, gradeKey) {
         },
     };
 
+    if (grade.level !== null && grade.level !== undefined && priorState.level !== null) {
+        update["system.level.value"] = grade.level;
+    }
+    if (grade.rarity) {
+        update["system.traits.rarity"] = grade.rarity;
+    }
+
     if (item.type === "shield") {
         if (grade.hardness !== null && grade.hardness !== undefined) update["system.hardness"] = grade.hardness;
         if (grade.maxHP !== null && grade.maxHP !== undefined) update["system.hp.max"] = grade.maxHP;
     }
 
-    if (material.prefixName && !item.name.startsWith(material.label)) {
-        update.name = `${material.label} ${item.name}`;
+    const prefix = material.namePrefix || material.label;
+    if (material.prefixName && prefix && !item.name.startsWith(prefix)) {
+        update.name = `${prefix} ${item.name}`;
     }
 
     await item.update(update);
@@ -88,6 +98,9 @@ async function removeMaterial(item, { render = true } = {}) {
         "system.rules": restoredRules,
         [`flags.${MODULE_ID}.-=${FLAG_APPLIED}`]: null,
     };
+
+    if (priorState.level !== null) update["system.level.value"] = priorState.level;
+    if (priorState.rarity !== null) update["system.traits.rarity"] = priorState.rarity;
 
     if (item.type === "shield") {
         if (priorState.hardness !== null) update["system.hardness"] = priorState.hardness;

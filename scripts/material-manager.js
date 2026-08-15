@@ -1,17 +1,32 @@
 import { refreshConfig } from "./config-registration.js";
-import { GRADES, ITEM_TYPES, MODULE_ID } from "./constants.js";
+import { GRADES, ITEM_TYPES, MODULE_ID, RARITIES, RARITY_LABELS } from "./constants.js";
 import { deleteMaterial, emptyGrade, emptyMaterial, getMaterials, saveMaterial } from "./materials-data.js";
 
 function itemTypeChoices(editing) {
     return ITEM_TYPES.map((type) => ({ type, checked: editing?.itemTypes?.includes(type) ?? false }));
 }
 
+function rarityOptions(selectedRarity) {
+    return [
+        { value: "", label: game.i18n.localize("PF2ECM.Manager.RarityUnchanged"), selected: !selectedRarity },
+        ...RARITIES.map((rarity) => ({
+            value: rarity,
+            label: game.i18n.localize(RARITY_LABELS[rarity]),
+            selected: selectedRarity === rarity,
+        })),
+    ];
+}
+
 function gradeRows(editing) {
-    return GRADES.map((key) => ({
-        key,
-        checked: !!editing?.grades?.[key],
-        data: editing?.grades?.[key] ?? emptyGrade(),
-    }));
+    return GRADES.map((key) => {
+        const data = editing?.grades?.[key] ?? emptyGrade();
+        return {
+            key,
+            checked: !!editing?.grades?.[key],
+            data,
+            rarityOptions: rarityOptions(data.rarity),
+        };
+    });
 }
 
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
@@ -155,9 +170,11 @@ class MaterialManager extends HandlebarsApplicationMixin(ApplicationV2) {
                 const raw = root.querySelector(`[name="grade-${grade}-${name}"]`)?.value;
                 return raw === "" || raw === undefined ? null : Number(raw);
             };
+            const rarityRaw = root.querySelector(`[name="grade-${grade}-rarity"]`)?.value;
             grades[grade] = {
                 level: num("level"),
                 price: num("price"),
+                rarity: rarityRaw || null,
                 hardness: num("hardness"),
                 maxHP: num("maxHP"),
             };
@@ -182,6 +199,7 @@ class MaterialManager extends HandlebarsApplicationMixin(ApplicationV2) {
         const material = {
             slug,
             label,
+            namePrefix: root.querySelector("[name='namePrefix']")?.value.trim() ?? "",
             itemTypes,
             prefixName: !!root.querySelector("[name='prefixName']")?.checked,
             description: root.querySelector("[name='description']")?.value.trim() ?? "",

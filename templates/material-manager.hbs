@@ -36,16 +36,16 @@
         {{/if}}
     {{else}}
         <section class="pf2ecm-editor">
-            <div class="form-group">
+            <div class="pf2ecm-field">
                 <label>{{localize "PF2ECM.Manager.Label"}}</label>
-                <input type="text" name="label" value="{{editing.label}}" />
+                <input type="text" name="label" value="{{editing.label}}" autocomplete="off" />
             </div>
-            <div class="form-group">
+            <div class="pf2ecm-field">
                 <label>{{localize "PF2ECM.Manager.Slug"}}</label>
                 <input type="text" name="slug" value="{{editing.slug}}" {{#unless isNew}}readonly{{/unless}}
-                    placeholder="{{localize 'PF2ECM.Manager.SlugHint'}}" />
+                    placeholder="{{localize 'PF2ECM.Manager.SlugHint'}}" autocomplete="off" />
             </div>
-            <div class="form-group">
+            <div class="pf2ecm-field">
                 <label>{{localize "PF2ECM.Manager.ItemTypes"}}</label>
                 <div class="pf2ecm-checkboxes">
                     {{#each itemTypeChoices}}
@@ -56,13 +56,18 @@
                     {{/each}}
                 </div>
             </div>
-            <div class="form-group">
-                <label>
+            <div class="pf2ecm-field">
+                <label class="pf2ecm-checkbox-label">
                     <input type="checkbox" name="prefixName" {{#if editing.prefixName}}checked{{/if}} />
                     {{localize "PF2ECM.Manager.PrefixName"}}
                 </label>
             </div>
-            <div class="form-group">
+            <div class="pf2ecm-field">
+                <label>{{localize "PF2ECM.Manager.NamePrefix"}}</label>
+                <input type="text" name="namePrefix" value="{{editing.namePrefix}}"
+                    placeholder="{{localize 'PF2ECM.Manager.NamePrefixHint'}}" autocomplete="off" />
+            </div>
+            <div class="pf2ecm-field">
                 <label>{{localize "PF2ECM.Manager.Description"}}</label>
                 <textarea name="description" rows="3">{{editing.description}}</textarea>
             </div>
@@ -82,6 +87,13 @@
                             <label>{{localize "PF2ECM.Manager.Price"}}
                                 <input type="number" step="0.01" name="grade-{{this.key}}-price" value="{{this.data.price}}" />
                             </label>
+                            <label>{{localize "PF2ECM.Manager.Rarity"}}
+                                <select name="grade-{{this.key}}-rarity">
+                                    {{#each this.rarityOptions}}
+                                        <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+                                    {{/each}}
+                                </select>
+                            </label>
                             <label>{{localize "PF2ECM.Manager.Hardness"}}
                                 <input type="number" name="grade-{{this.key}}-hardness" value="{{this.data.hardness}}" />
                             </label>
@@ -94,7 +106,7 @@
                 <p class="hint">{{localize "PF2ECM.Manager.GradesHint"}}</p>
             </fieldset>
 
-            <div class="form-group">
+            <div class="pf2ecm-field">
                 <label>{{localize "PF2ECM.Manager.Rules"}}</label>
                 <textarea name="rules" rows="6" class="pf2ecm-rules">{{rulesJson}}</textarea>
                 <p class="hint">{{localize "PF2ECM.Manager.RulesHint"}}</p>

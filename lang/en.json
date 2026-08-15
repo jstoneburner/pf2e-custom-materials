@@ -5,6 +5,12 @@
             "Standard": "Standard-Grade",
             "High": "High-Grade"
         },
+        "Rarity": {
+            "Common": "Common",
+            "Uncommon": "Uncommon",
+            "Rare": "Rare",
+            "Unique": "Unique"
+        },
         "Settings": {
             "ManagerName": "Custom Precious Materials",
             "ManagerLabel": "Manage Materials",
@@ -19,11 +25,15 @@
             "SlugHint": "Auto-generated from the label if left blank",
             "ItemTypes": "Applies To",
             "PrefixName": "Prefix item names with this material's label when applied",
+            "NamePrefix": "Name Prefix Override (optional)",
+            "NamePrefixHint": "Defaults to the label above if left blank",
             "Description": "Description",
             "Grades": "Grades",
-            "GradesHint": "Enable at least one grade. Hardness and Max HP are only used for shields.",
+            "GradesHint": "Enable at least one grade. Hardness and Max HP are only used for shields. Level and Rarity are written directly to the item; if it also carries magic runes with a higher level, the system will still show that higher level.",
             "Level": "Level",
             "Price": "Price (gp)",
+            "Rarity": "Rarity",
+            "RarityUnchanged": "Unchanged",
             "Hardness": "Hardness",
             "MaxHP": "Max HP",
             "Rules": "Rule Elements (JSON, optional)",

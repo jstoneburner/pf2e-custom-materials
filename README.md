@@ -72,9 +72,11 @@ public mechanisms:
   system.
 
 The tradeoff: price is a simplified approximation (base price plus the grade's flat price, without
-the system's bulk-scaling refinement), and applying a material does not change an item's `level`
-field or feed into the compendium browser's material filter, since those are driven by the system's
-closed internal data. For most homebrew purposes — a reskin of a magic material with its own price,
+the system's bulk-scaling refinement), and applying a material does not feed into the compendium
+browser's material filter, since that's driven by the system's closed internal data. Level and
+rarity are written directly to the item, so they do take effect — the one caveat is that a rune-driven
+level higher than what a material sets will still win, the same way it would for a system material.
+For most homebrew purposes — a reskin of a magic material with its own price, level, rarity,
 resistance-bypass behavior, and flavor — this is enough; it just isn't a byte-for-byte reproduction
 of how the printed materials work under the hood.
 

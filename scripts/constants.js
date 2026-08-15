@@ -22,3 +22,12 @@ export const ITEM_TYPE_TRAIT_CONFIG = {
 export const ITEM_TYPES = Object.keys(ITEM_TYPE_TRAIT_CONFIG);
 
 export const FLAG_APPLIED = "applied";
+
+export const RARITIES = ["common", "uncommon", "rare", "unique"];
+
+export const RARITY_LABELS = {
+    common: "PF2ECM.Rarity.Common",
+    uncommon: "PF2ECM.Rarity.Uncommon",
+    rare: "PF2ECM.Rarity.Rare",
+    unique: "PF2ECM.Rarity.Unique",
+};

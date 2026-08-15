@@ -5,12 +5,14 @@ import { GRADES, MODULE_ID, SETTING_MATERIALS } from "./constants.js";
  * @typedef {object} MaterialGrade
  * @property {number|null} level
  * @property {number|null} price      Price in gp for this grade.
+ * @property {string|null} rarity     One of "common"|"uncommon"|"rare"|"unique", or null to leave the item's rarity unchanged.
  * @property {number|null} hardness   Only meaningful for shields.
  * @property {number|null} maxHP      Only meaningful for shields.
  *
  * @typedef {object} MaterialDefinition
  * @property {string} slug
- * @property {string} label
+ * @property {string} label           Used for the registered trait and, if namePrefix is blank, the item name prefix.
+ * @property {string} namePrefix      Optional override for the text prepended to an item's name; falls back to label.
  * @property {string[]} itemTypes
  * @property {boolean} prefixName
  * @property {string} description
@@ -50,13 +52,14 @@ async function deleteMaterial(slug) {
 }
 
 function emptyGrade() {
-    return { level: null, price: null, hardness: null, maxHP: null };
+    return { level: null, price: null, rarity: null, hardness: null, maxHP: null };
 }
 
 function emptyMaterial(slug) {
     return {
         slug,
         label: "",
+        namePrefix: "",
         itemTypes: ["weapon"],
         prefixName: true,
         description: "",

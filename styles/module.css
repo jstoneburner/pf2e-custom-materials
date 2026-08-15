@@ -68,6 +68,33 @@
     gap: 0.6em;
 }
 
+/* Deliberately not named "form-group": Foundry's core stylesheet gives that class its own
+   flex layout, which reordered labels below their field in testing. This class keeps a plain
+   block layout so the label always renders above its input regardless of core CSS. */
+.pf2ecm-field {
+    display: block;
+}
+
+.pf2ecm-field > label:first-child {
+    display: block;
+    margin-bottom: 0.2em;
+    font-weight: bold;
+}
+
+.pf2ecm-field input[type="text"],
+.pf2ecm-field input[type="number"],
+.pf2ecm-field textarea,
+.pf2ecm-field select {
+    width: 100%;
+}
+
+.pf2ecm-checkbox-label {
+    display: flex !important;
+    align-items: center;
+    gap: 0.4em;
+    font-weight: normal !important;
+}
+
 .pf2ecm-checkboxes {
     display: flex;
     flex-wrap: wrap;
